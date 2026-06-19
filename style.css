@@ -34,27 +34,6 @@ li {
     border-radius: 10px;
 }
 
-nav {
-   position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 60px;
-    background: transparent;
-}
-
-nav ul {
-    display: flex;
-    gap: 20px;
-}
-
-nav a {
-   color: white;
-    font-weight: 500;
-}
-
 html {
     scroll-behavior: smooth;
     
@@ -79,16 +58,7 @@ li:hover {
 }
 
 @media (max-width: 600px) {
-    nav {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    nav ul {
-        flex-direction: column;
-        margin-top: 10px;
-    }
-
+   
     header {
         padding: 30px;
     }
@@ -108,7 +78,14 @@ li:hover {
     padding: 0 60px;
     background: #020617;
 }
-
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        min-height: 100vh;
+        padding: 40px 20px;
+    }
+}
 .hero-text h1 {
     font-size: 60px;
     margin: 0;
