@@ -1,56 +1,553 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shristi Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shristi Sharma — Software Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Playfair+Display:wght@500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #F8F8F6;
+      --surface:  #FFFFFF;
+      --ink:      #111110;
+      --muted:    #6B7280;
+      --subtle:   #E5E5E3;
+      --accent:   #4F5BD5;
+      --accent-l: #EEF0FD;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(248, 248, 246, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--subtle);
+      padding: 0 clamp(1.5rem, 6vw, 6rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    .nav-brand {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 6vw, 2rem);
+    }
+
+    section { padding: 5rem 0; }
+    section + section { border-top: 1px solid var(--subtle); }
+
+    /* ── HERO ── */
+    #about {
+      padding-top: 6rem;
+      padding-bottom: 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .hero-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+    }
+
+    .hero-text { flex: 1; }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 3.2rem);
+      font-weight: 500;
+      line-height: 1.15;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--muted);
+      max-width: 48ch;
+      line-height: 1.7;
+      margin-bottom: 1.75rem;
+    }
+
+    .avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid var(--subtle);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-l);
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+      letter-spacing: 0.01em;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.6rem 1.25rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.15s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover { background: #3e4bc0; }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--subtle);
+    }
+
+    .btn-outline:hover { border-color: var(--ink); }
+
+    /* ── SECTION HEADINGS ── */
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      margin-bottom: 0.75rem;
+    }
+
+    /* ── ABOUT / SUMMARY ── */
+    .summary-block {
+      border-left: 2px solid var(--accent);
+      padding-left: 1.5rem;
+    }
+
+    .summary-block p {
+      font-size: 1rem;
+      color: var(--ink);
+      line-height: 1.75;
+      font-weight: 300;
+      font-style: italic;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    .skill-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--ink);
+      font-weight: 400;
+    }
+
+    .skill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ── PROJECTS ── */
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--subtle);
+      border-radius: 10px;
+      padding: 1.5rem 1.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      text-decoration: none;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 2px 16px rgba(79, 91, 213, 0.08);
+    }
+
+    .project-info { flex: 1; }
+
+    .project-name {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.35rem;
+    }
+
+    .project-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .stack-tag {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--muted);
+      background: var(--bg);
+      border: 1px solid var(--subtle);
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      letter-spacing: 0.01em;
+    }
+
+    .project-arrow {
+      color: var(--muted);
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+      transition: color 0.15s, transform 0.15s;
+    }
+
+    .project-card:hover .project-arrow {
+      color: var(--accent);
+      transform: translate(2px, -2px);
+    }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .contact-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: var(--surface);
+      border: 1px solid var(--subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-icon svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--muted);
+      fill: none;
+    }
+
+    .contact-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 0.1rem;
+    }
+
+    .contact-value {
+      font-size: 0.9rem;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 400;
+    }
+
+    .contact-value:hover { color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--subtle);
+      padding: 2rem 0;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 560px) {
+      .hero-top { flex-direction: column-reverse; gap: 1.25rem; }
+      .avatar { width: 68px; height: 68px; }
+      h1 { font-size: 2rem; }
+      .nav-links { gap: 1.25rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
 </head>
 <body>
-<nav>
-    <h2 class="logo">Shristi</h2>
-    <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-brand" href="#">SS</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
-</nav>
-        <header class="hero">
-    <div class="hero-text">
-        <h1>Shristi Sharma</h1>
-        <p>I'a <span>Computer Science Student</span> | Java Developer | Full-Stack Enthusiast
+  </nav>
 
-I build web applications and love solving real-world problems with code.
-Currently seeking Software Development internships.<p>
+  <div class="container">
+
+    <!-- HERO / ABOUT -->
+    <section id="about">
+      <div class="hero-top">
+        <div class="hero-text">
+          <span class="eyebrow">Available for internships</span>
+          <h1>Shristi Sharma</h1>
+          <p class="hero-subtitle">
+            Computer Science undergraduate with hands-on experience in full-stack web development and machine learning. I write clean, maintainable code and enjoy working across the stack — from React frontends to Python-based ML pipelines.
+          </p>
+          <div class="btn-row">
+            <a href="#contact" class="btn btn-primary">Get in touch</a>
+            <a href="https://github.com/srixhtisharma0" target="_blank" rel="noopener" class="btn btn-outline">GitHub ↗</a>
+          </div>
+        </div>
+        <img
+          src="https://srixhtisharma0.github.io/portfolio/pro.jpg"
+          alt="Shristi Sharma"
+          class="avatar"
+          onerror="this.style.display='none'"
+        />
+      </div>
+
+      <div class="tags">
+        <span class="tag">React</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">Java</span>
+        <span class="tag">Python</span>
+        <span class="tag">Machine Learning</span>
+        <span class="tag">Full-Stack</span>
+      </div>
+    </section>
+
+    <!-- SUMMARY -->
+    <section id="summary">
+      <p class="section-label">Background</p>
+      <div class="summary-block">
+        <p>
+          A Computer Science undergraduate with solid foundations in full-stack development and applied machine learning. Experienced in building scalable web applications using React, Node.js, and Python-based ML frameworks. Comfortable working independently and contributing to collaborative, engineering-focused environments.
+        </p>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-item"><span class="skill-dot"></span> React / Next.js</div>
+        <div class="skill-item"><span class="skill-dot"></span> Node.js</div>
+        <div class="skill-item"><span class="skill-dot"></span> Java</div>
+        <div class="skill-item"><span class="skill-dot"></span> Python</div>
+        <div class="skill-item"><span class="skill-dot"></span> REST APIs</div>
+        <div class="skill-item"><span class="skill-dot"></span> SQL / Databases</div>
+        <div class="skill-item"><span class="skill-dot"></span> ML Frameworks</div>
+        <div class="skill-item"><span class="skill-dot"></span> Git / GitHub</div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <p class="section-label">Projects</p>
+
+      <div class="project-list">
+        <a class="project-card" href="https://github.com/srixhtisharma0" target="_blank" rel="noopener">
+          <div class="project-info">
+            <p class="project-name">Library Management System</p>
+            <p class="project-desc">
+              A full-stack application for managing library records, book inventory, and member transactions. Designed for reliability and ease of use by administrative staff.
+            </p>
+            <div class="project-stack">
+              <span class="stack-tag">Java</span>
+              <span class="stack-tag">SQL</span>
+              <span class="stack-tag">Full-Stack</span>
+            </div>
+          </div>
+          <span class="project-arrow">↗</span>
+        </a>
+
+        <a class="project-card" href="https://github.com/srixhtisharma0" target="_blank" rel="noopener">
+          <div class="project-info">
+            <p class="project-name">API Integration Project</p>
+            <p class="project-desc">
+              A backend project demonstrating RESTful API design and third-party service integration. Focused on clean architecture, error handling, and well-documented endpoints.
+            </p>
+            <div class="project-stack">
+              <span class="stack-tag">Node.js</span>
+              <span class="stack-tag">REST API</span>
+              <span class="stack-tag">JavaScript</span>
+            </div>
+          </div>
+          <span class="project-arrow">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <p class="section-label">Contact</p>
+      <h2 style="margin-bottom: 2rem;">Let's talk</h2>
+
+      <div class="contact-grid">
+        <div class="contact-row">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+          </div>
+          <div>
+            <p class="contact-label">Email</p>
+            <a class="contact-value" href="mailto:i.srishtisharma07@gmail.com">i.srishtisharma07@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+              <path d="M9 18c-4.51 2-5-2-7-2"/>
+            </svg>
+          </div>
+          <div>
+            <p class="contact-label">GitHub</p>
+            <a class="contact-value" href="https://github.com/srixhtisharma0" target="_blank" rel="noopener">github.com/srixhtisharma0</a>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.71 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+          </div>
+          <div>
+            <p class="contact-label">Phone</p>
+            <a class="contact-value" href="tel:+918626830793">+91 86268 30793</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 Shristi Sharma · Built with care</p>
     </div>
-
-    <div class="hero-img">
-        <img src="pro.jpg" alt="profile">
-    </div>
-</header>
-
-    <section id="about"class="fade-in">
-        <h2>Summary</Summary></h2>
-        <p> A Computer Science undergraduate with strong expertise in full-stack development and machine learning.
-Experienced in building scalable web applications. Skilled in React, Node.js, and Python-based ML frameworks.</p>
-    </section>
-
-    <section id="projects" class="fade-in">
-
-        <h2>Projects</h2>
-        <ul>
-            <li>Library Management System </li>
-            <li>API Project ⚡</li>
-        </ul>
-    </section>
-
-    <section id="contact" class="fade-in">
-        <h2>Lets Connect</h2>
-        <p>Email: i.srishtisharma07@gmail.com</p>
-        <p>GitHub: github.com/srixhtisharma0</p>
-        <p>Mobile: 8626830793</p>
-    </section>
+  </footer>
 
 </body>
 </html>
-
